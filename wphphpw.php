@@ -4,8 +4,8 @@
 Plugin Name: WP H-PHP Widget
 Plugin URI: https://github.com/m266/wp-h-php-widget
 Description: Dieses Plugin f&uuml;gt ein Widget zum Einf&uuml;gen von PHP-Code im Dashboard hinzu.
-Version: 1.1
-Date: 2018-08-21
+Version: 1.1.1
+Date: 2018-12-27
 Text Domain: php-widget
 Author: Hans M. Herbrand
 Author URI: http://www.web266.de
