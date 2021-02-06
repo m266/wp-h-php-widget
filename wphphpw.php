@@ -4,8 +4,8 @@
 Plugin Name: WP H-PHP Widget
 Plugin URI: https://github.com/m266/wp-h-php-widget
 Description: Dieses Plugin f&uuml;gt ein Widget zum Einf&uuml;gen von PHP-Code im Dashboard hinzu.
-Version: 1.1.2
-Date: 2021-01-02
+Version: 1.2
+Date: 2021-02-06
 Text Domain: php-widget
 Author: Hans M. Herbrand
 Author URI: http://www.web266.de
@@ -18,30 +18,19 @@ GitHub Plugin URI: https://github.com/m266/wp-h-php-widget
 
 // Externer Zugriff verhindern
 defined('ABSPATH') || exit();
-// GitHub-Updater aktiv?
-// Makes sure the plugin is defined before trying to use it
-if (!function_exists('is_plugin_active')) {
-    require_once ABSPATH . '/wp-admin/includes/plugin.php';
-}
-// Makes sure the plugin is defined before trying to use it
-if (!function_exists('is_plugin_inactive')) {
-    require_once ABSPATH . '/wp-admin/includes/plugin.php';
-}
+
+if ($pagenow == 'plugins.php'){
 // GitHub-Updater inaktiv?
-if (is_plugin_inactive('github-updater/github-updater.php')) {
-    // Plugin ist inaktiv
-    // Plugin-Name im Meldungstext anpassen
-    function wphphpw_missing_github_updater_notice() {; // GitHub-Updater fehlt
-        ?>
-    <div class="error notice">  <!-- Wenn ja, Meldung ausgeben -->
-        <p><?php _e('Bitte das Plugin <a href="https://www.web266.de/tutorials/github/github-updater/" target="_blank">
-        <b>"GitHub-Updater"</b></a> herunterladen, installieren und aktivieren.
-        Ansonsten werden keine weiteren Updates f&uuml;r das Plugin <b>"WP H-PHP Widget"</b> bereit gestellt!');?></p>
-    </div>
-                        <?php
+        if (!function_exists('is_plugin_inactive')) {
+            require_once ABSPATH . '/wp-admin/includes/plugin.php';
+        }
+        if (is_plugin_inactive('github-updater/github-updater.php')) {
+            ?>
+<div class="notice notice-error"><p>Bitte das Plugin <a href="https://www.web266.de/tutorials/github/github-updater/" target="_blank"><b>"GitHub-Updater"</b></a> herunterladen, installieren und aktivieren, um weiterhin Updates f&uuml;r das Plugin "WP H-PHP Widget" zu erhalten!</p></div>
+<?php
 }
-    add_action('admin_notices', 'wphphpw_missing_github_updater_notice');
 }
+
 class PHP_Widget extends WP_Widget {
 // Frontend-Design Funktionen
     public function __construct() {

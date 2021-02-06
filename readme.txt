@@ -1,6 +1,6 @@
 ﻿=== WP H-PHP Widget ===
 Requires at least: 4.0
-Tested up to: 5.6
+Tested up to: 5.6.1
 License: GNU General Public License v2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -14,6 +14,10 @@ Dieses Plugin f&uuml;gt ein Widget zum Einfügen von PHP-Code im Dashboard hinzu
 2. Activate the plugin through the 'Plugins' menu in WordPress
 
 == Changelog ==
+Version 1.2
+1. Code verbessert
+2. Tested up to: 5.6.1
+
 Version 1.1.2
 1. Tested up to: 5.6
 
