@@ -1,11 +1,10 @@
 <?php
-
 /*
 Plugin Name: WP H-PHP Widget
 Plugin URI: https://github.com/m266/wp-h-php-widget
 Description: Dieses Plugin f&uuml;gt ein Widget zum Einf&uuml;gen von PHP-Code im Dashboard hinzu.
-Version: 1.2
-Date: 2021-02-06
+Version: 1.3
+Date: 2021-03-15
 Text Domain: php-widget
 Author: Hans M. Herbrand
 Author URI: http://www.web266.de
@@ -19,17 +18,24 @@ GitHub Plugin URI: https://github.com/m266/wp-h-php-widget
 // Externer Zugriff verhindern
 defined('ABSPATH') || exit();
 
-if ($pagenow == 'plugins.php'){
-// GitHub-Updater inaktiv?
-        if (!function_exists('is_plugin_inactive')) {
-            require_once ABSPATH . '/wp-admin/includes/plugin.php';
-        }
-        if (is_plugin_inactive('github-updater/github-updater.php')) {
-            ?>
-<div class="notice notice-error"><p>Bitte das Plugin <a href="https://www.web266.de/tutorials/github/github-updater/" target="_blank"><b>"GitHub-Updater"</b></a> herunterladen, installieren und aktivieren, um weiterhin Updates f&uuml;r das Plugin "WP H-PHP Widget" zu erhalten!</p></div>
-<?php
+//////////////////////////////////////////////////////////////////////////////////////////
+// Check GitHub Updater aktiv
+// Anpassungen Plugin-Name und Funktions-Name vornehmen
+if (!function_exists('is_plugin_inactive')) {
+    require_once ABSPATH . '/wp-admin/includes/plugin.php';
+}
+if (is_plugin_inactive('github-updater/github-updater.php')) {
+// E-Mail an Admin senden, wenn inaktiv
+register_activation_hook( __FILE__, 'wphphpw_activate' ); // Funktions-Name anpassen
+function wphphpw_activate() { // Funktions-Name anpassen
+$to = get_option('admin_email');
+$subject = 'Plugin "WP H-PHP Widget"'; // Plugin-Name anpassen
+$message = 'Bitte das Plugin "GitHub Updater" hier https://web266.de/tutorials/github/github-updater/ herunterladen, installieren und aktivieren, um weiterhin Updates zu erhalten!';
+wp_mail($to, $subject, $message );
 }
 }
+
+//////////////////////////////////////////////////////////////////////////////////////////
 
 class PHP_Widget extends WP_Widget {
 // Frontend-Design Funktionen
